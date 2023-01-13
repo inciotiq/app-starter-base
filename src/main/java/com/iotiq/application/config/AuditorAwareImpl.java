@@ -1,6 +1,6 @@
 package com.iotiq.application.config;
 
-import com.iotiq.application.user.domain.User;
+import com.iotiq.user.domain.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
