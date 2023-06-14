@@ -1,5 +1,6 @@
 application:
   name: culturati
+defaultTenant: tenant_1
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
