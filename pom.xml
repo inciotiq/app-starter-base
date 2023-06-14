@@ -119,6 +119,24 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                    <from>
+                        <image>eclipse-temurin:20.0.1_9-jre</image>
+                    </from>
+                    <to>
+                        <image>iotiqdevops/culturati-backend</image>
+                    </to>
+                    <auth>
+                        <username>${env.DOCKERHUB_USERNAME} ?: "username1"</username>
+                        <password>${env.DOCKERHUB_PASSWORD} ?: "pass"</password>
+                    </auth>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
