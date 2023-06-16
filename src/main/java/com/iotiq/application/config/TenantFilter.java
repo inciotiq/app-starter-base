@@ -22,7 +22,7 @@ class TenantFilter implements Filter {
         try {
             chain.doFilter(request, response);
         } finally {
-            TenantContext.setCurrentTenant("");
+            TenantContext.removeCurrentTenant();
         }
 
     }
