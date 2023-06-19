@@ -1,5 +1,6 @@
 package com.iotiq.application.config;
 
+import com.iotiq.application.exception.TenantDataSourceConnectionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -30,10 +31,10 @@ public class MultiTenantConfig {
 
         for (File propertyFile : files) {
             Properties tenantProperties = new Properties();
-            DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+            DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
 
-            try {
-                tenantProperties.load(new FileInputStream(propertyFile));
+            try (FileInputStream inStream = new FileInputStream(propertyFile)) {
+                tenantProperties.load(inStream);
                 String tenantId = tenantProperties.getProperty("name");
 
                 dataSourceBuilder.driverClassName(tenantProperties.getProperty("datasource.driver-class-name"));
@@ -42,7 +43,7 @@ public class MultiTenantConfig {
                 dataSourceBuilder.url(tenantProperties.getProperty("datasource.url"));
                 resolvedDataSources.put(tenantId, dataSourceBuilder.build());
             } catch (IOException exp) {
-                throw new RuntimeException("Problem in tenant datasource:" + exp);
+                throw new TenantDataSourceConnectionException("Problem in tenant datasource:" , exp);
             }
         }
 
