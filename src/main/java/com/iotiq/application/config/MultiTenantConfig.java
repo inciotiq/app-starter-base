@@ -23,10 +23,13 @@ public class MultiTenantConfig {
     @Value("${defaultTenant}")
     private String defaultTenant;
 
+    @Value("${tenantPropertiesPath}")
+    private String tenantPropertiesPath;
+
     @Bean
     @ConfigurationProperties(prefix = "tenants")
     public DataSource dataSource() {
-        File[] files = Paths.get("application/src/main/resources/tenants").toFile().listFiles();
+        File[] files = Paths.get(tenantPropertiesPath).toFile().listFiles();
         Map<Object, Object> resolvedDataSources = new HashMap<>();
 
         for (File propertyFile : files) {
@@ -43,7 +46,7 @@ public class MultiTenantConfig {
                 dataSourceBuilder.url(tenantProperties.getProperty("datasource.url"));
                 resolvedDataSources.put(tenantId, dataSourceBuilder.build());
             } catch (IOException exp) {
-                throw new TenantDataSourceConnectionException("Problem in tenant datasource:" , exp);
+                throw new TenantDataSourceConnectionException("Problem in tenant datasource:", exp);
             }
         }
 

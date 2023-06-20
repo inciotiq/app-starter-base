@@ -7,6 +7,7 @@ app:
       expirationMinutes: 60
 
 defaultTenant: tenant_1
+tenantPropertiesPath: application/src/main/resources/tenants
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
