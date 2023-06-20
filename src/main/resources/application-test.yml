@@ -1,0 +1,2 @@
+defaultTenant: tenant_1
+tenantPropertiesPath: src/main/resources/tenants

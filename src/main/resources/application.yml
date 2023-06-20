@@ -1,3 +1,13 @@
+app:
+  jwt:
+    secret: doSCf7QzUN8XxRr9eTGaLAOPOb4yWq1NMFDUV5MhH39MbDZJbaLarAie42MleAlFdoSCf7QzUN8XxRr9eTGaLAOPOb4yWq1NMFDUV5MhH39MbDZJbaLarAie42MleAlF
+    refresh:
+      expirationMinutes: 360
+    access:
+      expirationMinutes: 60
+
+defaultTenant: tenant_1
+tenantPropertiesPath: application/src/main/resources/tenants
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -6,3 +16,19 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+#logging:
+#  level:
+#    com:
+#      iotiq:
+#        abakus:
+#          config:
+#            RequestLogger: debug
+#    org:
+#      hibernate:
+#        SQL: debug
+#        type: trace
+#      type:
+#        descriptor:
+#          sql:
+#            BasicBinder: trace
